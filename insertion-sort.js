@@ -3,7 +3,6 @@
 function insertionSort(arr) {
   /*
   Pseudocode:
-
   Copy the original array
   Create an array to store the sorted values
   While the array is not empty:
@@ -18,7 +17,35 @@ function insertionSort(arr) {
   Return the sorted array
   */
 
-  // Your code here 
+  // Your code here
+  let newArr = arr.slice();
+  let sorted = [];
+
+  while (newArr.length) {
+    console.log(sorted.join(','));
+    let sLength = sorted.length;
+    let counter = 0;
+
+    let popped = newArr.pop();
+
+    if (!sorted.length) {
+      sorted.push(popped);
+    }
+
+    for (let i = sorted.length - 1; i >= 0; i--) {
+      if (popped > sorted[i]) {
+        sorted.splice(i + 1, 0, popped);
+        break;
+      }
+      counter++;
+    }
+
+    if (counter === sLength) {
+      sorted.unshift(popped);
+    }
+  }
+  newArr = sorted;
+  return newArr;
 }
 
 // In-place Insertion Sort
@@ -39,8 +66,31 @@ function insertionSortInPlace(arr) {
   - Increment the dividing pointer and repeat
   Return the mutated array
   */
+  // Your code here
 
-  // Your code here 
+  let pointer = 0;
+  let count = arr.length - 1;
+  while (pointer <= count) {
+    console.log(arr.join(','));
+    let bool = true;
+
+    if (arr[pointer] > arr[pointer + 1]) {
+      let unsorted = arr.splice(pointer + 1, 1);
+      console.log('UNSORTED', unsorted);
+
+      for (let i = pointer; i >= 0; i--) {
+        if (unsorted > arr[i]) {
+          arr.splice(i + 1, 0, unsorted);
+          bool = false;
+        }
+      }
+      if (bool) {
+        arr.unshift(unsorted);
+      }
+    }
+
+    pointer++;
+  }
 }
 
 module.exports = [insertionSort, insertionSortInPlace];
