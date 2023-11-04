@@ -76,16 +76,16 @@ function insertionSortInPlace(arr) {
 
     if (arr[pointer] > arr[pointer + 1]) {
       let unsorted = arr.splice(pointer + 1, 1);
-      console.log('UNSORTED', unsorted);
 
       for (let i = pointer; i >= 0; i--) {
         if (unsorted > arr[i]) {
-          arr.splice(i + 1, 0, unsorted);
+          arr.splice(i + 1, 0, unsorted[0]);
           bool = false;
+          break
         }
       }
       if (bool) {
-        arr.unshift(unsorted);
+        arr.unshift(unsorted[0]);
       }
     }
 
